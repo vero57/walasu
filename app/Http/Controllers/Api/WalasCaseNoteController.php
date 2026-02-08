@@ -43,7 +43,7 @@ class WalasCaseNoteController extends WalasApiController
 
             // Filter by walas
             if (!empty($validated['walas_id'])) {
-                $query->where('id_guru', $validated['walas_id']);
+                $query->where('walas_id', $validated['walas_id']);
             }
 
             $total = $query->count();
@@ -58,9 +58,9 @@ class WalasCaseNoteController extends WalasApiController
             $formattedNotes = $notes->map(function ($note) {
                 return [
                     'id' => $note->id,
-                    'student_id' => $note->id_siswa,
+                    'student_id' => $note->siswas_id,
                     'student_name' => $note->siswa->nama ?? null,
-                    'walas_id' => $note->id_guru,
+                    'walas_id' => $note->walas_id,
                     'walas_name' => $note->walas->nama ?? null,
                     'tanggal' => $note->tanggal->format('Y-m-d'),
                     'keterangan' => $note->keterangan,
@@ -98,7 +98,7 @@ class WalasCaseNoteController extends WalasApiController
             $limit = $validated['limit'] ?? 20;
             $page = $validated['page'] ?? 1;
 
-            $query = CatatanKasusSiswa::where('id_siswa', $studentId)
+            $query = CatatanKasusSiswa::where('siswas_id', $studentId)
                 ->orderBy('tanggal', 'DESC');
 
             $total = $query->count();
@@ -112,9 +112,9 @@ class WalasCaseNoteController extends WalasApiController
             $formattedNotes = $notes->map(function ($note) {
                 return [
                     'id' => $note->id,
-                    'student_id' => $note->id_siswa,
+                    'student_id' => $note->siswas_id,
                     'student_name' => $note->siswa->nama ?? null,
-                    'walas_id' => $note->id_guru,
+                    'walas_id' => $note->walas_id,
                     'walas_name' => $note->walas->nama ?? null,
                     'tanggal' => $note->tanggal->format('Y-m-d'),
                     'keterangan' => $note->keterangan,
@@ -151,7 +151,7 @@ class WalasCaseNoteController extends WalasApiController
             $limit = $validated['limit'] ?? 20;
             $page = $validated['page'] ?? 1;
 
-            $query = CatatanKasusSiswa::where('id_guru', $walasId)
+            $query = CatatanKasusSiswa::where('walas_id', $walasId)
                 ->orderBy('tanggal', 'DESC');
 
             $total = $query->count();
@@ -165,9 +165,9 @@ class WalasCaseNoteController extends WalasApiController
             $formattedNotes = $notes->map(function ($note) {
                 return [
                     'id' => $note->id,
-                    'student_id' => $note->id_siswa,
+                    'student_id' => $note->siswas_id,
                     'student_name' => $note->siswa->nama ?? null,
-                    'walas_id' => $note->id_guru,
+                    'walas_id' => $note->walas_id,
                     'tanggal' => $note->tanggal->format('Y-m-d'),
                     'keterangan' => $note->keterangan,
                     'tindakan' => $note->tindakan ?? null,
@@ -199,7 +199,7 @@ class WalasCaseNoteController extends WalasApiController
 
             $limit = $validated['limit'] ?? 5;
 
-            $notes = CatatanKasusSiswa::where('id_siswa', $studentId)
+            $notes = CatatanKasusSiswa::where('siswas_id', $studentId)
                 ->with(['siswa', 'walas'])
                 ->orderBy('tanggal', 'DESC')
                 ->take($limit)
@@ -212,8 +212,8 @@ class WalasCaseNoteController extends WalasApiController
             $formattedNotes = $notes->map(function ($note) {
                 return [
                     'id' => $note->id,
-                    'student_id' => $note->id_siswa,
-                    'walas_id' => $note->id_guru,
+                    'student_id' => $note->siswas_id,
+                    'walas_id' => $note->walas_id,
                     'walas_name' => $note->walas->nama ?? null,
                     'tanggal' => $note->tanggal->format('Y-m-d'),
                     'keterangan' => $note->keterangan,

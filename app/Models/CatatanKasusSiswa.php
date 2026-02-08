@@ -10,7 +10,8 @@ class CatatanKasusSiswa extends Model
     use HasFactory;
     protected $fillable = [
             'walas_id',
-            'siswas_id', 
+            'siswas_id',
+            'tanggal',
             'kasus',
             'tindak_lanjut',
             'keterangan'
@@ -19,5 +20,10 @@ class CatatanKasusSiswa extends Model
     public function siswa()
     {
         return $this->belongsTo(Siswa::class, 'siswas_id', 'id');
+    }
+
+    public function walas()
+    {
+        return $this->belongsTo(Walas::class, 'walas_id', 'id');
     }
 }
