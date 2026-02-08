@@ -14,7 +14,7 @@ use App\Http\Controllers\Api\WalasAchievementController;
 |--------------------------------------------------------------------------
 */
 
-Route::prefix('api/v1/walas')->group(function () {
+Route::prefix('v1/walas')->group(function () {
     
     /*
     |--------------------------------------------------------------------------

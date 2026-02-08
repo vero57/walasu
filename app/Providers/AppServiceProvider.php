@@ -10,7 +10,7 @@ use App\Http\Middleware\WalasMiddleware;
 class AppServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * Register any application services.RouteServiceProvider
      */
     public function register(): void
     {
