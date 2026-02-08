@@ -11,7 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::createIfNotExists('biodata_siswas', function (Blueprint $table) {
+        if (!Schema::hasTable('biodata_siswas')) {
+            Schema::create('biodata_siswas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('walas_id');
             $table->foreign('walas_id')->references('id')->on('walas')->onDelete('cascade')->onUpdate ('cascade');
@@ -63,7 +64,8 @@ return new class extends Migration
             $table->text('pengalaman_ekskul');
             $table->text('kepribadian');
             $table->timestamps();
-        });
+            });
+        }
     }
 
     /**
