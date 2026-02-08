@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 namespace App\Http\Controllers\Api;
 
@@ -13,7 +13,75 @@ use Illuminate\Http\Request;
 class WalasCaseNoteController extends WalasApiController
 {
     /**
-     * GET /api/v1/walas/case-notes/{studentId}
+     * GET /api/v1/walas/case-notes
+     * Get all case notes with filters (date range, walas, etc)
+     * Query: ?start_date=2025-01-01&end_date=2025-01-31&walas_id=X&limit=100&page=1
+     */
+    public function index(Request $request)
+    {
+        try {
+            $validated = $request->validate([
+                'start_date' => 'nullable|date',
+                'end_date' => 'nullable|date',
+                'walas_id' => 'nullable|integer',
+                'limit' => 'nullable|integer|min:1|max:500',
+                'page' => 'nullable|integer|min:1'
+            ]);
+
+            $page = $validated['page'] ?? 1;
+            $limit = $validated['limit'] ?? 100;
+
+            $query = CatatanKasusSiswa::query();
+
+            // Filter by date range
+            if (!empty($validated['start_date'])) {
+                $query->whereDate('tanggal', '>=', $validated['start_date']);
+            }
+            if (!empty($validated['end_date'])) {
+                $query->whereDate('tanggal', '<=', $validated['end_date']);
+            }
+
+            // Filter by walas
+            if (!empty($validated['walas_id'])) {
+                $query->where('id_guru', $validated['walas_id']);
+            }
+
+            $total = $query->count();
+
+            $notes = $query
+                ->with(['siswa', 'walas'])
+                ->orderBy('tanggal', 'DESC')
+                ->skip(($page - 1) * $limit)
+                ->take($limit)
+                ->get();
+
+            $formattedNotes = $notes->map(function ($note) {
+                return [
+                    'id' => $note->id,
+                    'student_id' => $note->id_siswa,
+                    'student_name' => $note->siswa->nama ?? null,
+                    'walas_id' => $note->id_guru,
+                    'walas_name' => $note->walas->nama ?? null,
+                    'tanggal' => $note->tanggal->format('Y-m-d'),
+                    'keterangan' => $note->keterangan,
+                    'tindakan' => $note->tindakan ?? null,
+                    'status' => $note->status ?? 'Active',
+                    'created_at' => $note->created_at->format('Y-m-d H:i:s'),
+                    'updated_at' => $note->updated_at->format('Y-m-d H:i:s')
+                ];
+            });
+
+            return $this->successResponse(
+                $this->paginatedResponse($formattedNotes, $page, $limit, $total),
+                'Case notes retrieved successfully'
+            );
+        } catch (\Exception $e) {
+            return $this->errorResponse('Failed to retrieve case notes: ' . $e->getMessage(), 500);
+        }
+    }
+
+    /**
+     * GET /api/v1/walas/case-notes/byStudent/{studentId}
      * Get all case notes for a student
      */
     public function byStudent($studentId, Request $request)

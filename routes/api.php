@@ -49,8 +49,9 @@ Route::prefix('api/v1/walas')->group(function () {
     |--------------------------------------------------------------------------
     */
     Route::prefix('case-notes')->controller(WalasCaseNoteController::class)->group(function () {
-        Route::get('{studentId}', 'byStudent')             ->name('walas.caseNotes.byStudent');
-        Route::get('walas/{walasId}', 'byWalas')           ->name('walas.caseNotes.byWalas');
+        Route::get('/', 'index')                           ->name('walas.caseNotes.index');
+        Route::get('byStudent/{studentId}', 'byStudent')   ->name('walas.caseNotes.byStudent');
+        Route::get('byWalas/{walasId}', 'byWalas')         ->name('walas.caseNotes.byWalas');
         Route::get('{studentId}/recent', 'recent')         ->name('walas.caseNotes.recent');
     });
 
