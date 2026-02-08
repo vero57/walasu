@@ -122,8 +122,6 @@ Route::get('/rombeldetail/{rombel_id}', [ShowDetailRombelController::class, 'sho
 Route::resource('walas', WaliKelasPageController::class);
 Route::get('/hapuswalas/{id}', [WaliKelasPageController::class, 'hapuswalas'])->name('hapuswalas');
 Route::get('/walas/hapuswalas/{id}', [WaliKelasPageController::class, 'hapuswalas']);
-Route::put('/walas/{id}', [WaliKelasPageController::class, 'update'])->name('walas.update');
-Route::get('/walas/{id}/edit', [WaliKelasPageController::class, 'edit'])->name('walas.edit');
 Route::get ('/walas_search', [WaliKelasPageController::class,'walas_search']);
 
 // CRUD KAKOM
