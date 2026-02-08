@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('biodata_siswas', function (Blueprint $table) {
+        Schema::createIfNotExists('biodata_siswas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('walas_id');
             $table->foreign('walas_id')->references('id')->on('walas')->onDelete('cascade')->onUpdate ('cascade');
