@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\WalasAttendanceController;
 use App\Http\Controllers\Api\WalasCaseNoteController;
 use App\Http\Controllers\Api\WalasHomeVisitController;
 use App\Http\Controllers\Api\WalasAchievementController;
+use App\Http\Controllers\Api\WalasTeacherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +84,17 @@ Route::prefix('v1/walas')->group(function () {
         Route::get('walas/{walasId}', 'byWalas')           ->name('walas.achievements.byWalas');
         Route::get('stats', 'stats')                       ->name('walas.achievements.stats');
         Route::get('type-stats', 'byTypeStats')            ->name('walas.achievements.typeStats');
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | SECTION F: Walas (Teacher) Data
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('walas')->controller(WalasTeacherController::class)->group(function () {
+        Route::get('/', 'index')                           ->name('walas.walas.index');
+        Route::get('/{id}', 'show')                        ->name('walas.walas.show');
+        Route::get('/search', 'search')                    ->name('walas.walas.search');
     });
 });
 
