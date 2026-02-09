@@ -54,6 +54,7 @@ Route::prefix('v1/walas')->group(function () {
         Route::get('byStudent/{studentId}', 'byStudent')   ->name('walas.caseNotes.byStudent');
         Route::get('byWalas/{walasId}', 'byWalas')         ->name('walas.caseNotes.byWalas');
         Route::get('{studentId}/recent', 'recent')         ->name('walas.caseNotes.recent');
+        Route::post('sync', 'sync')                        ->name('walas.caseNotes.sync');
     });
 
     /*
