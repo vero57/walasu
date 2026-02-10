@@ -35,4 +35,8 @@ return [
         ],
     ],
 
-];
+    'ruang_siswa' => [
+        'base_url' => env('RUANG_SISWA_API_URL', 'http://localhost:3001/api'),
+        'api_key' => env('RUANG_SISWA_API_KEY', ''),
+    ],
+
