@@ -52,7 +52,7 @@
             box-sizing: border-box;
             max-height: 60px; /* Menentukan tinggi kotak pesan agar tidak terlalu panjang */
             overflow: hidden;
-            
+
             /* Flexbox untuk menyejajarkan teks di tengah */
             display: flex;
             justify-content: center; /* Mengatur teks ke tengah secara horizontal */
@@ -123,7 +123,7 @@
   <div class="user-info d-flex align-items-center">
               @if(session()->has('walas_id'))
                   <i class="bi bi-person-circle text-primary me-2" style="font-size: 24px;"></i>  <!-- Icon User dengan warna biru -->
-                  
+
                   <!-- Tautkan nama walas ke /userprofile -->
                   <a href="/profilewalas" class="text-decoration-none" data-bs-toggle="tooltip" data-bs-placement="top" title="Lihat Profile">
                       <span>{{ $walas->nama }}</span>  <!-- Nama Walas yang sedang login -->
@@ -207,8 +207,22 @@
       <div class="stat-content">
         <h4>Administrasi Walas</h4>
         <p class="mb-0">
-        <a href="/adminwalas" data-bs-toggle="tooltip" data-bs-placement="top" title="Management data Administrasi">Kelola Administrasi Walas di Sini</a>
-    </p>
+            <a href="/adminwalas" data-bs-toggle="tooltip" data-bs-placement="top" title="Management data Administrasi">Kelola Administrasi Walas di Sini</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-3 col-md-6">
+    <div class="stat-item text-center">
+      <div class="stat-icon">
+        <i class="bi bi-card-checklist"></i>
+      </div>
+      <div class="stat-content">
+        <h4>Menu Absensi</h4>
+        <p class="mb-0">
+            <a href="/absensi" data-bs-toggle="tooltip" data-bs-placement="top" title="Management data Administrasi">Kelola Data Absen di Sini</a>
+        </p>
       </div>
     </div>
   </div>
@@ -219,7 +233,7 @@
     </section><!-- /Hero Section -->
 
 </main>
-  
+
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">SIJA SMKN 1 Cibinong</strong> <span>All Rights Reserved</span></p>
       <div class="credits">

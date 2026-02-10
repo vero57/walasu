@@ -85,6 +85,7 @@ use App\Http\Controllers\AlumniDataController;
 use App\Http\Controllers\KeluarRombelViewKepsek;
 use App\Http\Controllers\KeluarRombelViewKurikulumController;
 use App\Http\Controllers\KeluarRombelViewKakomController;
+use App\Http\Controllers\AbsenController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -317,7 +318,7 @@ Route::resource('kurikulumwalas', KurikulumWalasController::class);
     Route::resource('catatankasussiswa', CatatanKasusController::class);
 
 
-// CRUD DENAH TEMPAT KERJA KELOMPOK SISWA ADM WALAS 
+// CRUD DENAH TEMPAT KERJA KELOMPOK SISWA ADM WALAS
 Route::resource('denahkerjakelompok', DenahKerjaKelompokSiswaController::class);
 Route::get('/createkelompok', [DenahKerjaKelompokSiswaController::class, 'create'])->name('denahkerjakelompok.create');
 Route::post('/kelompok/{id}/add-siswa', [DenahKerjaKelompokSiswaController::class, 'addSiswa'])->name('kelompok.addSiswa');
@@ -361,7 +362,7 @@ Route::post('/jadwalpiket/simpan', [JadwalPiketController::class, 'simpan'])
 Route::put('/jadwalpiket/siswa/{id}', [JadwalPiketController::class, 'update'])
     ->name('jadwalpiket.updateSiswa');
 
-// CRUD SERAH TERIMA RAPOT 
+// CRUD SERAH TERIMA RAPOT
 Route::resource('serahterimarapor', DaftarPenyerahanRapotController::class);
 Route::get('/serahterimarapor-download-template', [DaftarPenyerahanRapotController::class, 'downloadTemplate'])->name('serahterimarapor.download-template');
 Route::get('/penyerahanrapotcreate', [DaftarPenyerahanRapotController::class, 'create'])->name('penyerahanrapot.create');
@@ -370,7 +371,7 @@ Route::get('/penyerahanrapot/{id}/edit', [DaftarPenyerahanRapotController::class
 Route::get('/hapuspenyerahanrapot/{id}', [DaftarPenyerahanRapotController::class, 'hapuspenyerahanrapot'])->name('hapuspenyerahanrapot');
 Route::put('/penyerahanrapot/{id}', [DaftarPenyerahanRapotController::class, 'update'])->name('penyerahanrapot.update');
 
-// CRUD HOME VISIT 
+// CRUD HOME VISIT
 Route::resource('homevisit', HomeVisitController::class);
 Route::post('/homevisit/generatepdf', [HomeVisitController::class, 'generatePDF'])->name('homevisit.generatepdf');
 Route::get('/homevisitcreate', [HomeVisitController::class, 'create'])->name('homevisit.create');
@@ -379,7 +380,7 @@ Route::get('/homevisit/{id}/edit', [HomeVisitController::class, 'edit'])->name('
 Route::get('/hapushomevisit/{id}', [HomeVisitController::class, 'hapushomevisit'])->name('hapushomevisit');
 Route::put('/homevisit/{id}', [HomeVisitController::class, 'update'])->name('homevisit.update');
 
-// CRUD BUKU TAMU ORTI 
+// CRUD BUKU TAMU ORTI
 Route::resource('bukutamuortu', BukuTamuOrtuController::class);
 Route::post('/bukutamuortu/generatepdf', [BukuTamuOrtuController::class, 'generatePDF'])->name('bukutamuortu.generatepdf');
 Route::get('/bukutamuortucreate', [BukuTamuOrtuController::class, 'create'])->name('bukutamuortu.create');
@@ -388,7 +389,7 @@ Route::get('/bukutamuortu/{id}/edit', [BukuTamuOrtuController::class, 'edit'])->
 Route::get('/hapusbukutamuortu/{id}', [BukuTamuOrtuController::class, 'hapusbukutamuortu'])->name('hapusbukutamuortu');
 Route::put('/bukutamuortu/{id}', [BukuTamuOrtuController::class, 'update'])->name('bukutamuortu.update');
 
-// CRUD AGENDA WALAS 
+// CRUD AGENDA WALAS
 Route::resource('agendawalas', AgendaKegiatanWalasController::class);
 Route::get('/agendawalascreate', [AgendaKegiatanWalasController::class, 'create'])->name('agendawalas.create');
 Route::post('/agendawalas/store', [AgendaKegiatanWalasController::class, 'store'])->name('agendawalas.store');
@@ -452,7 +453,7 @@ Route::get('/hapusprestasisiswainput/{id}', [PrestasiSiswaInputController::class
 Route::put('/prestasisiswainput/{id}', [PrestasiSiswaInputController::class, 'update'])->name('prestasisiswainput.update');
 
 
-// Route Kaprog Walas Data 
+// Route Kaprog Walas Data
 Route::resource('admwalasview', AdmWalasViewController::class);
 Route::get('agendawalasview', [ViewAdmWalasKaprogController::class, 'agendawalas'])->name('admwalas.agendawalas');
 Route::get('identiaskelasview', [ViewAdmWalasKaprogController::class, 'identitaskelas'])->name('admwalas.identitaskelas');
@@ -480,10 +481,10 @@ Route::post('/prestasisiswaview/generatepdf', [ViewAdmWalasKaprogController::cla
 Route::get('grafikjaraktempuhview', [ViewAdmWalasKaprogController::class, 'grafikjaraktempuh'])->name('admwalas.grafikjaraktempuh');
 Route::post('/grafikjaraktempuhview/generatepdf', [ViewAdmWalasKaprogController::class, 'generatePDFgrafikjaraktempuh'])->name('grafikjaraktempuh.generatepdfgrafikjaraktempuh');
 
-// Kakom View TA 
+// Kakom View TA
 Route::get('/detailkelasview/{walas_id}', [KakomRombelController::class, 'showDetail'])->name('rombel.showDetail');
 
-// Route Kepsek Walas Data 
+// Route Kepsek Walas Data
 Route::resource('admwalasviewkepsek', AdmWalasViewKepsekController::class);
 Route::get('beritaacarakenaikanviewkepsek', [ViewAdmWalasKepsekController::class, 'beritaacarakenaikankepsek'])->name('admwalas.beritaacarakenaikankepsek');
 Route::get('beritaacarakelulusanviewkepsek', [ViewAdmWalasKepsekController::class, 'beritaacarakelulusankepsek'])->name('admwalas.beritaacarakelulusankepsek');
@@ -511,10 +512,10 @@ Route::post('/prestasisiswaviewkepsek/generatepdf', [ViewAdmWalasKepsekControlle
 Route::get('grafikjaraktempuhviewkepsek', [ViewAdmWalasKepsekController::class, 'grafikjaraktempuhkepsek'])->name('admwalas.grafikjaraktempuhkepsek');
 Route::post('/grafikjaraktempuhviewkepsek/generatepdf', [ViewAdmWalasKepsekController::class, 'generatePDFkepsekgrafikjaraktempuh'])->name('grafikjaraktempuh.generatepdfkepsekgrafikjaraktempuh');
 
-// Kepsek View TA 
+// Kepsek View TA
 Route::get('/detailkelasviewkepsek/{walas_id}', [KepsekRombelController::class, 'showDetailKepsek'])->name('rombel.showDetailKepsek');
 
-// Route Kurikulum Walas Data 
+// Route Kurikulum Walas Data
 Route::resource('admwalasviewkurikulum', AdmWalasKurikulumViewController::class);
 Route::get('beritaacarakenaikanviewkurikulum', [ViewAdmWalaskurikulumController::class, 'beritaacarakenaikankurikulum'])->name('admwalas.beritaacarakenaikankurikulum');
 Route::get('beritaacarakelulusanviewkurikulum', [ViewAdmWalaskurikulumController::class, 'beritaacarakelulusankurikulum'])->name('admwalas.beritaacarakelulusankurikulum');
@@ -545,8 +546,10 @@ Route::post('/grafikjaraktempuhviewkurikulum/generatepdf', [ViewAdmWalaskurikulu
 // Kurikulum View Kurikulum
 Route::get('/detailkelasviewkurikulum/{walas_id}', [RombelDataController::class, 'showDetailKurikulum'])->name('rombel.showDetailKurikulum');
 
+// Absen
+Route::get('/absensi', [AbsenController::class, 'index'])->name('absensi.index');
 
-// CRUD TA 
+// CRUD TA
 Route::post('/keluar-rombel/save', [DataSiswaWalasController::class, 'saveKeterangan'])->name('keluar-rombel.save');
 Route::post('/siswadata/simpan-keterangan/{id}', [KeluarRombelController::class, 'store'])->name('siswadata.simpanKeterangan');
 Route::resource('keluarrombeldata', KeluarRombelViewController::class);
@@ -566,7 +569,7 @@ Route::get('/keluarrombeldetailkakom/{rombels_id}', [KeluarRombelViewKakomContro
                 ->name('detail.keluarormbelkakom');
 
 
-// Route Alumni 
+// Route Alumni
 Route::get('/alumni', [AlumniDataController::class, 'pengaturanalumni'])->name('alumni.index');
 Route::get('/alumnidatakepsek', [AlumniDataController::class, 'pengaturanalumnikepsek'])->name('alumnikepsek.index');
 Route::get('/alumnidatakakom', [AlumniDataController::class, 'pengaturanalumnikakom'])->name('alumnikakom.index');
