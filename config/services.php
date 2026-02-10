@@ -40,3 +40,4 @@ return [
         'api_key' => env('RUANG_SISWA_API_KEY', ''),
     ],
 
+];
