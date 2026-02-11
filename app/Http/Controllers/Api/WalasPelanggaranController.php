@@ -307,13 +307,13 @@ class WalasPelanggaranController extends WalasApiController
     {
         return [
             'id' => $violation->id,
-            'student_id' => $violation->siswas_id,
-            'student_name' => $violation->siswa->nama ?? null,
+            'siswas_id' => $violation->siswas_id,
+            'siswas_name' => $violation->siswa->nama ?? null,
             'class_id' => $violation->siswa->rombels_id ?? null,
             'class_name' => $violation->siswa->rombel->nama_kelas ?? null,
             'walas_id' => $violation->walas_id,
             'walas_name' => $violation->walas->nama ?? null,
-            'tanggal' => $violation->tanggal ? $violation->tanggal->format('Y-m-d') : null,
+            'tanggal_pembinaan' => $violation->tanggal ? $violation->tanggal->format('Y-m-d') : null,
             'kasus' => $violation->kasus,
             'tindak_lanjut' => $violation->tindak_lanjut,
             'keterangan' => $violation->keterangan,
