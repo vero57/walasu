@@ -210,7 +210,7 @@ class WalasPelanggaranController extends WalasApiController
             $syncData = [
                 'student_id' => $validated['student_id'],
                 'student_name' => $student->nama,
-                'class_id' => $student->id_rombel,
+                'class_id' => $student->rombels_id,
                 'kasus' => $validated['kasus'],
                 'tindak_lanjut' => $validated['tindak_lanjut'],
                 'keterangan' => $validated['keterangan'] ?? '',
@@ -310,7 +310,7 @@ class WalasPelanggaranController extends WalasApiController
             'student_id' => $violation->siswas_id,
             'student_name' => $violation->siswa->nama ?? null,
             'class_id' => $violation->siswa->rombels_id ?? null,
-            'class_name' => $violation->siswa->rombel->nama_rombel ?? null,
+            'class_name' => $violation->siswa->rombel->nama_kelas ?? null,
             'walas_id' => $violation->walas_id,
             'walas_name' => $violation->walas->nama ?? null,
             'tanggal' => $violation->tanggal ? $violation->tanggal->format('Y-m-d') : null,
