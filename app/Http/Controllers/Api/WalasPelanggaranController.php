@@ -309,7 +309,7 @@ class WalasPelanggaranController extends WalasApiController
             'id' => $violation->id,
             'student_id' => $violation->siswas_id,
             'student_name' => $violation->siswa->nama ?? null,
-            'class_id' => $violation->siswa->id_rombel ?? null,
+            'class_id' => $violation->siswa->rombels_id ?? null,
             'class_name' => $violation->siswa->rombel->nama_rombel ?? null,
             'walas_id' => $violation->walas_id,
             'walas_name' => $violation->walas->nama ?? null,
