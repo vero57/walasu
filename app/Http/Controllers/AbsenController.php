@@ -3,62 +3,46 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use App\Models\Walas;
 
 class AbsenController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        return view('homepagegtk.absensi');
-    }
+        $walasId = session('walas_id');
+        $walas = Walas::find($walasId);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+        // Mapping nama walas 
+        $kelasMap = [
+            'Mono Sujono' => ['XII SIJA 1'],
+            'Doni' => ['XI DKV 1'],
+            'Rahma Donawati' => ['XI DKV 2 1'],
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        ];
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $kelasBoleh = [];
+        if ($walas && isset($kelasMap[$walas->nama])) {
+            $kelasBoleh = $kelasMap[$walas->nama];
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        $url = config('services.absensi_yosua.url');
+        $token = config('services.absensi_yosua.token');
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        $response = Http::withHeaders([
+            'X-API-KEY' => $token
+        ])->get($url . '/data-absen');
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $allData = $response->successful() ? $response->json() : [];
+
+        // Filter data
+        $dataAbsensi = collect($allData)->filter(function ($item) use ($kelasBoleh) {
+            return in_array($item['class_name'], $kelasBoleh);
+        });
+
+
+        $namaKelas = $kelasBoleh[0] ?? 'Tidak Diketahui';
+
+        return view('homepagegtk.absensi', compact('dataAbsensi', 'namaKelas'));
     }
 }

@@ -342,14 +342,14 @@
 
                 <div class="col-12 d-flex flex-wrap justify-content-between align-items-center gap-2">
                     <!-- Tombol Unggah Data & Tambah Data -->
-                    <div class="d-flex gap-2 flex-wrap">
+                    <!-- <div class="d-flex gap-2 flex-wrap">
                         <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#uploadAbsensiModal" data-bs-toggle="tooltip" data-bs-placement="top" title="Unggah Data Melalui Excel">
                             <i class="bi bi-cloud-upload"></i> Unggah Data
                         </button>
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAbsensiModal" data-bs-toggle="tooltip" data-bs-placement="top" title="Tambah Data Manual">
                             <i class="bi bi-plus"></i> Tambah
                         </button>
-                    </div>
+                    </div> -->
 
                     <!-- Form Cari Absensi -->
                     <form action="{{ url('absensi_search') }}" method="GET" class="d-flex align-items-center">
@@ -372,49 +372,45 @@
             </div>
 
             <!-- Container Table dengan Scroll jika terlalu lebar -->
-<div class="d-flex align-items-center justify-content-start">
-<div class="table-container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Tanggal</th>
-                <th>Siswa</th>
-                <th>Status</th>
-                <th>Keterangan</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{-- @forelse ($absensi ?? [] as $data) --}}
-                {{-- <tr> --}}
-                    {{-- <td>{{ $loop->iteration }}</td> --}}
-                    {{-- <td>{{ $data->tanggal ?? '-' }}</td> --}}
-                    {{-- <td>{{ $data->siswa_nama ?? '-' }}</td> --}}
-                    {{-- <td>{{ $data->status ?? '-' }}</td> --}}
-                    {{-- <td>{{ $data->keterangan ?? '-' }}</td> --}}
-                    {{-- <td> --}}
-                        {{-- <div class="d-flex justify-content-center flex-wrap gap-2"> --}}
-                            {{-- <a href="#" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Data"> --}}
-                                {{-- Edit --}}
-                            {{-- </a> --}}
-                            {{-- <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus Data"> --}}
-                                {{-- Hapus --}}
-                            {{-- </a> --}}
-                        {{-- </div> --}}
-                    {{-- </td> --}}
-                {{-- </tr> --}}
-            {{-- @empty --}}
-                <tr>
-                    <td colspan="6" class="text-center text-muted py-4">
-                        <i class="bi bi-inbox"></i> Tidak ada data absensi
-                    </td>
-                </tr>
-            {{-- @endforelse --}}
-        </tbody>
-    </table>
-</div>
-        </div>
+            <div class="d-flex align-items-center justify-content-start">
+                    <div class="container">
+                        <h2>Daftar Absensi Kelas: {{ $namaKelas }}</h2>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Siswa</th>
+                                    <th>Tanggal</th>
+                                    <th>Status</th>
+                                    <th>Foto</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($dataAbsensi as $index => $absen)
+                                    <tr>
+                                        <td>{{ $index + 1 }}</td>
+                                        <td>{{ $absen['student_name'] }}</td>
+                                        <td>{{ $absen['date'] }}</td>
+                                        <td>
+                                            <span class="badge text-black">{{ $absen['status_name'] }}</span>
+                                        </td>
+                                        <td>
+                                            @if($absen['photo_url'])
+                                                <img src="{{ $absen['photo_url'] }}" width="50">
+                                            @else
+                                                No Photo
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="5" class="text-center">Tidak ada data absensi untuk kelas XI DKV 1.</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
 
 <!-- Modal Unggah Data Absensi -->
 <div class="modal fade" id="uploadAbsensiModal" tabindex="-1" aria-labelledby="uploadAbsensiModalLabel" aria-hidden="true">

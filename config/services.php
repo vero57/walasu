@@ -34,5 +34,9 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    'absensi_yosua' => [
+    'url'   => env('ABSENSI_URL'),
+    'token' => env('MY_API_KEY'),
+],
 
 ];

@@ -624,3 +624,21 @@ Route::post('/homepagesiswa/logout', function () {
     session()->flash('status', 'Logout Berhasil');
     return redirect('/');
 })->name('logoutsiswa');
+
+
+
+
+
+use Illuminate\Support\Facades\Http;
+
+Route::get('/test-nembak', function () {
+    $url = config('services.absensi_yosua.url');
+    $token = config('services.absensi_yosua.token');
+
+    // Pke withHeaders karena web absen gw minta X-API-KEY
+    $response = Http::withHeaders([
+        'X-API-KEY' => $token
+    ])->acceptJson()->get($url . '/data-absen');
+
+    return $response->json();
+});
