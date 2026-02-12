@@ -56,7 +56,7 @@ class WalasPelanggaranController extends WalasApiController
             $total = $query->count();
 
             $violations = $query
-                ->with(['siswa', 'walas'])
+                ->with(['siswa', 'siswa.biodata', 'walas'])
                 ->orderBy('tanggal', 'DESC')
                 ->skip(($page - 1) * $limit)
                 ->take($limit)
@@ -82,7 +82,7 @@ class WalasPelanggaranController extends WalasApiController
     public function show($id)
     {
         try {
-            $violation = CatatanKasusSiswa::with(['siswa', 'walas'])->findOrFail($id);
+            $violation = CatatanKasusSiswa::with(['siswa', 'siswa.biodata', 'walas'])->findOrFail($id);
 
             return $this->successResponse(
                 $this->formatViolationData($violation),
@@ -115,7 +115,7 @@ class WalasPelanggaranController extends WalasApiController
             $total = $query->count();
 
             $violations = $query
-                ->with(['siswa', 'walas'])
+                ->with(['siswa', 'siswa.biodata', 'walas'])
                 ->orderBy('tanggal', 'DESC')
                 ->skip(($page - 1) * $limit)
                 ->take($limit)
@@ -153,7 +153,7 @@ class WalasPelanggaranController extends WalasApiController
             $total = $query->count();
 
             $violations = $query
-                ->with(['siswa', 'walas'])
+                ->with(['siswa', 'siswa.biodata', 'walas'])
                 ->orderBy('tanggal', 'DESC')
                 ->skip(($page - 1) * $limit)
                 ->take($limit)
@@ -305,6 +305,8 @@ class WalasPelanggaranController extends WalasApiController
      */
     private function formatViolationData($violation)
     {
+        $biodata = $violation->siswa->biodata ?? null;
+        
         return [
             'id' => $violation->id,
             'siswas_id' => $violation->siswas_id,
@@ -318,6 +320,18 @@ class WalasPelanggaranController extends WalasApiController
             'tindak_lanjut' => $violation->tindak_lanjut,
             'keterangan' => $violation->keterangan,
             'severity' => $this->determineSeverity($violation->kasus),
+            'parent_data' => [
+                'ayah' => [
+                    'nama_ayah' => $biodata->nama_ayah ?? null,
+                    'no_wa_ayah' => $biodata->no_wa_ayah ?? null,
+                    'siswas_id' => $violation->siswas_id
+                ],
+                'ibu' => [
+                    'nama_ibu' => $biodata->nama_ibu ?? null,
+                    'no_wa_ibu' => $biodata->no_wa_ibu ?? null,
+                    'siswas_id' => $violation->siswas_id
+                ]
+            ],
             'created_at' => $violation->created_at->format('Y-m-d H:i:s'),
             'updated_at' => $violation->updated_at->format('Y-m-d H:i:s')
         ];
