@@ -20,10 +20,8 @@ class KehadiranSeeder extends Seeder
      */
     public function run(): void
     {
-        // Get walas users for data
-        $walas = User::whereHas('roles', function ($query) {
-            $query->where('name', 'walas');
-        })->limit(3)->get();
+        // Get walas users (users with role walas or just first 3 users)
+        $walas = User::limit(3)->get();
 
         // Get some students
         $students = Siswa::limit(10)->get();
