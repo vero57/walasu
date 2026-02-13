@@ -37,7 +37,7 @@ class KeterlambatanSeeder extends Seeder
             [
                 'walas_id' => $walas->first()->id,
                 'siswas_id' => $siswas->first()->id,
-                'kelas' => 'XI-A',
+                'kelas' => 'X SIJA 1',
                 'tanggal' => now()->subDays(10)->format('Y-m-d'),
                 'jam_masuk' => '07:15:00',
                 'menit_terlambat' => 15,
@@ -47,7 +47,7 @@ class KeterlambatanSeeder extends Seeder
             [
                 'walas_id' => $walas->first()->id,
                 'siswas_id' => $siswas->first()->id,
-                'kelas' => 'XI-A',
+                'kelas' => 'X SIJA 1',
                 'tanggal' => now()->subDays(8)->format('Y-m-d'),
                 'jam_masuk' => '07:20:00',
                 'menit_terlambat' => 20,
@@ -57,7 +57,7 @@ class KeterlambatanSeeder extends Seeder
             [
                 'walas_id' => $walas->first()->id,
                 'siswas_id' => $siswas->first()->id,
-                'kelas' => 'XI-A',
+                'kelas' => 'X SIJA 1',
                 'tanggal' => now()->subDays(6)->format('Y-m-d'),
                 'jam_masuk' => '07:10:00',
                 'menit_terlambat' => 10,
@@ -69,7 +69,7 @@ class KeterlambatanSeeder extends Seeder
             [
                 'walas_id' => $walas->first()->id,
                 'siswas_id' => $siswas->skip(1)->first()?->id ?? $siswas->first()->id,
-                'kelas' => 'XI-A',
+                'kelas' => 'X TKJ 1',
                 'tanggal' => now()->subDays(9)->format('Y-m-d'),
                 'jam_masuk' => '07:25:00',
                 'menit_terlambat' => 25,
@@ -81,7 +81,7 @@ class KeterlambatanSeeder extends Seeder
             [
                 'walas_id' => $walas->skip(1)->first()?->id ?? $walas->first()->id,
                 'siswas_id' => $siswas->skip(2)->first()?->id ?? $siswas->first()->id,
-                'kelas' => 'XI-B',
+                'kelas' => 'X SIJA 2',
                 'tanggal' => now()->subDays(7)->format('Y-m-d'),
                 'jam_masuk' => '07:30:00',
                 'menit_terlambat' => 30,
@@ -91,7 +91,7 @@ class KeterlambatanSeeder extends Seeder
             [
                 'walas_id' => $walas->skip(1)->first()?->id ?? $walas->first()->id,
                 'siswas_id' => $siswas->skip(2)->first()?->id ?? $siswas->first()->id,
-                'kelas' => 'XI-B',
+                'kelas' => 'X SIJA 2',
                 'tanggal' => now()->subDays(5)->format('Y-m-d'),
                 'jam_masuk' => '07:15:00',
                 'menit_terlambat' => 15,
@@ -103,7 +103,7 @@ class KeterlambatanSeeder extends Seeder
             [
                 'walas_id' => $walas->skip(1)->first()?->id ?? $walas->first()->id,
                 'siswas_id' => $siswas->skip(3)->first()?->id ?? $siswas->first()->id,
-                'kelas' => 'XI-B',
+                'kelas' => 'X TKJ 2',
                 'tanggal' => now()->subDays(4)->format('Y-m-d'),
                 'jam_masuk' => '07:45:00',
                 'menit_terlambat' => 45,
@@ -115,7 +115,7 @@ class KeterlambatanSeeder extends Seeder
             [
                 'walas_id' => $walas->skip(2)->first()?->id ?? $walas->first()->id,
                 'siswas_id' => $siswas->skip(4)->first()?->id ?? $siswas->first()->id,
-                'kelas' => 'XI-C',
+                'kelas' => 'X SIJA 1',
                 'tanggal' => now()->subDays(3)->format('Y-m-d'),
                 'jam_masuk' => '07:20:00',
                 'menit_terlambat' => 20,
@@ -125,7 +125,7 @@ class KeterlambatanSeeder extends Seeder
             [
                 'walas_id' => $walas->skip(2)->first()?->id ?? $walas->first()->id,
                 'siswas_id' => $siswas->skip(4)->first()?->id ?? $siswas->first()->id,
-                'kelas' => 'XI-C',
+                'kelas' => 'X SIJA 1',
                 'tanggal' => now()->subDays(1)->format('Y-m-d'),
                 'jam_masuk' => '07:12:00',
                 'menit_terlambat' => 12,
@@ -137,7 +137,7 @@ class KeterlambatanSeeder extends Seeder
             [
                 'walas_id' => $walas->skip(2)->first()?->id ?? $walas->first()->id,
                 'siswas_id' => $siswas->skip(5)->first()?->id ?? $siswas->first()->id,
-                'kelas' => 'XI-C',
+                'kelas' => 'X TKJ 1',
                 'tanggal' => now()->subDays(2)->format('Y-m-d'),
                 'jam_masuk' => '07:35:00',
                 'menit_terlambat' => 35,
@@ -149,7 +149,7 @@ class KeterlambatanSeeder extends Seeder
             [
                 'walas_id' => $walas->skip(3)->first()?->id ?? $walas->first()->id,
                 'siswas_id' => $siswas->skip(6)->first()?->id ?? $siswas->first()->id,
-                'kelas' => 'XI-D',
+                'kelas' => 'X SIJA 2',
                 'tanggal' => now()->format('Y-m-d'),
                 'jam_masuk' => '07:18:00',
                 'menit_terlambat' => 18,
@@ -159,7 +159,7 @@ class KeterlambatanSeeder extends Seeder
             [
                 'walas_id' => $walas->skip(3)->first()?->id ?? $walas->first()->id,
                 'siswas_id' => $siswas->skip(7)->first()?->id ?? $siswas->first()->id,
-                'kelas' => 'XI-D',
+                'kelas' => 'X TKJ 2',
                 'tanggal' => now()->subDays(1)->format('Y-m-d'),
                 'jam_masuk' => '07:22:00',
                 'menit_terlambat' => 22,
